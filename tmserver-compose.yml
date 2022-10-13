@@ -6,7 +6,39 @@ services:
     depends_on:
      - db
     restart: always
-    env_file: .env-tmserver
+    environment:
+     - SERVER_LOGIN="butterlan"
+     - SERVER_LOGIN_PASSWORD=""
+     - SERVER_SA_PASSWORD="butteradmin"
+     - SERVER_ADM_PASSWORD=""
+     - SERVER_PORT=2350
+     - SERVER_P2P_PORT=3450
+     - SERVER_NAME="ButterMania"
+     - SERVER_COMMENT="Trackmania Server an der Butterlan"
+     - SERVER_PASSWORD=""
+     - HIDE_SERVER=0
+     - MAX_PLAYERS=32
+     - PACKMASK=stadium
+     - GAMEMODE=1
+     - CHATTIME=10000
+     - FINISHTIMEOUT=1
+     - DISABLERESPAWN=0
+     - ROUNDS_POINTSLIMIT=30
+     - TIMEATTACK_LIMIT=180000
+     - TEAM_POINTSLIMIT=50
+     - TEAM_MAXPOINTS=6
+     - LAPS_NBLAPS=5
+     - LAPS_TIMELIMIT=0
+     - CUP_POINTSLIMIT=100
+     - CUP_ROUNDSPERCHALLENGE=5
+     - CUP_NBWINNERS=3
+     - CUP_WARMUPDURATION=2
+     # XASECO
+     - MASTERADMIN_LOGIN="butteradmin"
+     - MYSQL_HOST=db
+     - MYSQL_LOGIN="trackmania"
+     - MYSQL_DATABASE="trackmania"
+     - MYSQL_PASSWORD=""
     volumes:
      - ./tracks:/var/lib/tmserver/GameData/Tracks/Challenges/Custom # => Custom tracks
      - ./playlist.txt:/var/lib/tmserver/playlist.txt # => Custom playlist
@@ -21,7 +53,11 @@ services:
     image: mysql:5
     container_name: trackmania_db
     restart: always
-    env_file: .env-tmserver-mysql
+    environment:
+     - MYSQL_ROOT_PASSWORD=
+     - MYSQL_DATABASE=trackmania
+     - MYSQL_USER=trackmania
+     - MYSQL_PASSWORD=
     volumes:
      - trackmania-db:/var/lib/mysql
   pma:
