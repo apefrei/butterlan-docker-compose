@@ -8,14 +8,14 @@ services:
     restart: always
     environment:
      - SERVER_LOGIN="butterlan"
-     - SERVER_LOGIN_PASSWORD=""
+     - SERVER_LOGIN_PASSWORD="<pw>"
      - SERVER_SA_PASSWORD="butteradmin"
-     - SERVER_ADM_PASSWORD=""
+     - SERVER_ADM_PASSWORD="<pw>"
      - SERVER_PORT=2350
      - SERVER_P2P_PORT=3450
      - SERVER_NAME="ButterMania"
      - SERVER_COMMENT="Trackmania Server an der Butterlan"
-     - SERVER_PASSWORD=""
+     - SERVER_PASSWORD="<pw>"
      - HIDE_SERVER=0
      - MAX_PLAYERS=32
      - PACKMASK=stadium
@@ -38,13 +38,13 @@ services:
      - MYSQL_HOST=db
      - MYSQL_LOGIN="trackmania"
      - MYSQL_DATABASE="trackmania"
-     - MYSQL_PASSWORD=""
+     - MYSQL_PASSWORD="<pw>"
     volumes:
-     - ./tracks:/var/lib/tmserver/GameData/Tracks/Challenges/Custom # => Custom tracks
-     - ./playlist.txt:/var/lib/tmserver/playlist.txt # => Custom playlist
-     - ./blacklist:/var/lib/xaseco/blacklist # => Plugin blacklist
-     - ./plugins:/var/lib/xaseco/plugins/custom # => Custom plugins
-     - ./config:/var/lib/xaseco/config # => Custom configuration files
+     - /data/tm/tracks:/var/lib/tmserver/GameData/Tracks/Challenges/Custom # => Custom tracks
+     - /data/tm/playlist.txt:/var/lib/tmserver/playlist.txt # => Custom playlist
+     - /data/tm/blacklist:/var/lib/xaseco/blacklist # => Plugin blacklist
+     - /data/tm/plugins:/var/lib/xaseco/plugins/custom # => Custom plugins
+     - /data/tm/config:/var/lib/xaseco/config # => Custom configuration files
     ports:
      - "2350:2350"
      - "2350:2350/udp"
@@ -54,10 +54,10 @@ services:
     container_name: trackmania_db
     restart: always
     environment:
-     - MYSQL_ROOT_PASSWORD=
+     - MYSQL_ROOT_PASSWORD="<pw>"
      - MYSQL_DATABASE=trackmania
      - MYSQL_USER=trackmania
-     - MYSQL_PASSWORD=
+     - MYSQL_PASSWORD="<pw>"
     volumes:
      - trackmania-db:/var/lib/mysql
   pma:
